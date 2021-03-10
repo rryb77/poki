@@ -97,3 +97,43 @@ GROUP BY a.Name ORDER BY COUNT(p.id) DESC
 
 
 -- 16. How many poems have an emotion of sadness?
+SELECT COUNT(p.id) as "Poem Count", e.Name AS "Emotion"
+FROM Poem p
+	LEFT JOIN PoemEmotion pe ON p.Id = pe.PoemId
+	LEFT JOIN Emotion e ON pe.EmotionId = e.id
+GROUP BY e.Name, e.id
+HAVING e.Id = 3
+
+
+-- 17. How many poems are not associated with any emotion?
+SELECT COUNT(p.id) as "Poem Count"
+FROM Poem p
+	LEFT JOIN PoemEmotion pe ON p.Id = pe.PoemId
+	LEFT JOIN Emotion e ON pe.EmotionId = e.id
+GROUP BY e.Name, e.id
+HAVING e.Name IS NULL
+
+
+-- 18. Which emotion is associated with the least number of poems?
+SELECT top 1 COUNT(p.id) as "Poem Count", e.Name AS "Emotion"
+FROM Poem p
+	LEFT JOIN PoemEmotion pe ON p.Id = pe.PoemId
+	LEFT JOIN Emotion e ON pe.EmotionId = e.id
+GROUP BY e.Name, e.id
+HAVING e.Name IS NOT NULL
+ORDER BY COUNT(p.id) ASC
+
+
+-- 19. Which grade has the largest number of poems with an emotion of joy?
+SELECT top 1 COUNT(p.id) as "Joy Poem Count", g.Name AS "Grade"
+FROM Poem p
+	LEFT JOIN PoemEmotion pe ON p.Id = pe.PoemId
+	LEFT JOIN Emotion e ON pe.EmotionId = e.Id
+	LEFT JOIN Author a ON p.AuthorId = a.Id
+	LEFT JOIN Grade g ON a.GradeId = g.Id
+GROUP BY e.Name, e.Id, g.Name
+HAVING e.Name IS NOT NULL AND e.Id = 4
+ORDER BY COUNT(p.Id) ASC
+
+
+-- 20. Which gender has the least number of poems with an emotion of fear?
