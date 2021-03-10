@@ -137,3 +137,12 @@ ORDER BY COUNT(p.Id) ASC
 
 
 -- 20. Which gender has the least number of poems with an emotion of fear?
+SELECT top 1 COUNT(p.id) as "Fear Poem Count", ge.Name AS "Gender"
+FROM Poem p
+	LEFT JOIN PoemEmotion pe ON p.Id = pe.PoemId
+	LEFT JOIN Emotion e ON pe.EmotionId = e.Id
+	LEFT JOIN Author a ON p.AuthorId = a.Id
+	LEFT JOIN Gender ge ON a.GenderId = ge.Id
+WHERE e.Id = 3
+GROUP BY ge.Name
+ORDER BY COUNT(p.Id) ASC
