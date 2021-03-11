@@ -1,10 +1,10 @@
 ﻿-- 1. What grades are stored in the database?
-SELECT COUNT(g.id) AS "Grade Count"
+SELECT * AS "Grades"
 FROM Grade g;
 
 
 -- 2. What emotions may be associated with a poem?
-SELECT COUNT(e.id) AS "Number of Emotions"
+SELECT * AS "Emotions"
 FROM  Emotion e;
 
 
@@ -40,10 +40,10 @@ FROM Poem p;
 
 
 -- 8. Which poem has the fewest characters?
-SELECT top 1 p.Title, p.WordCount
+SELECT top 1 p.Title, p.CharCount
 FROM Poem p
-WHERE p.WordCount > 0
-ORDER BY p.WordCount ASC
+WHERE p.CharCount > 0
+ORDER BY p.CharCount ASC
 
 
 -- 9. How many authors are in the third grade?
